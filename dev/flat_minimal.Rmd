@@ -1,0 +1,56 @@
+---
+title: "flat_minimal.Rmd empty"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r development, include=FALSE}
+library(testthat)
+library(glue)
+```
+
+<!--
+ You need to run the 'description' chunk in the '0-dev_history.Rmd' file before continuing your code there.
+-->
+
+# Say Hello
+
+```{r function-say_hello}
+#' Function to say hello to a given person
+#'
+#' @param someone Character Name of the person to say hello to
+#'
+#' @return Side effect: Display message in the command to say hello to someone
+#' @export
+#' @importFrom glue glue
+#'
+#' @examples
+say_hello <- function(someone = "You") {
+  message(glue("Hello {someone}"))
+}
+```
+
+```{r development-1}
+say_hello()
+```
+
+
+```{r examples-say_hello}
+say_hello() # Hello You
+say_hello(someone = "World") # Hello World
+```
+
+```{r tests-say_hello}
+test_that("say_hello works", {
+  expect_message(say_hello(), "Hello You")
+  expect_message(say_hello(someone = "World"), "Hello World")
+})
+```
+
+
+```{r development-inflate, eval=FALSE}
+# Run but keep eval=FALSE to avoid infinite loop
+# Execute in the console directly
+fusen::inflate(flat_file = "dev/flat_minimal.Rmd", vignette_name = "Hello Package")
+```
